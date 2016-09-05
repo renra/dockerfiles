@@ -1,7 +1,7 @@
 FROM debian:jessie
 
 RUN apt-get -qyy update
-RUN apt-get -qyy install build-essential git git-core
+RUN apt-get -qyy install build-essential git git-core libcurl3
 
 # Ruby compilation from source
 
