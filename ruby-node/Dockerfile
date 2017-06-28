@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 
 RUN apt-get -qyy update
 RUN apt-get -qyy install build-essential git git-core libcurl3 curl
@@ -8,8 +8,8 @@ RUN apt-get install -qyy libssl-dev
 RUN apt-get -qyy install python && \
   mkdir /node && \
   cd /node && \
-  curl http://nodejs.org/dist/v4.5.0/node-v4.5.0.tar.gz | tar xz && \
-  cd node-v4.5.0 && \
+  curl http://nodejs.org/dist/v8.1.2/node-v8.1.2.tar.gz | tar xz && \
+  cd node-v8.1.2 && \
   ./configure && \
   make && \
   make install && \
