@@ -1,11 +1,19 @@
 FROM debian:jessie
 
-RUN apt-get -qy update
-RUN apt-get -qy install build-essential git git-core libcurl3 curl
-RUN apt-get install -qy zlib1g-dev
-RUN apt-get install -qy libssl-dev
-RUN apt-get install -qy libpq-dev
-RUN apt-get install -qy libreadline-dev
+RUN apt-get -qy update && \
+  apt-get -qy install build-essential git git-core libcurl3 curl && \
+  apt-get install -qy zlib1g-dev && \
+  apt-get install -qy libssl-dev && \
+  apt-get install -qy libpq-dev && \
+  apt-get install -qy libreadline-dev && \
+  apt-get install -qy locales locales-all && \
+  rm -rf /var/lib/apt/lists/*
+
+RUN locale-gen en_GB.UTF-8
+
+ENV LC_ALL=en_GB.UTF-8
+ENV LANG=en_GB.UTF-8
+ENV LANGUAGE=en_GB.UTF-8
 
 ARG MAJOR=2.2
 ARG MINOR=3

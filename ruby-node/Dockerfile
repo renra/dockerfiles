@@ -7,13 +7,9 @@ RUN apt-get install -qy libssl-dev
 
 RUN mkdir /ruby && \
   cd /ruby && \
-  curl http://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.0.tar.gz | tar xz && \
-  cd ruby-2.3.0 && \
+  curl http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.1.tar.gz | tar xz && \
+  cd ruby-2.4.1 && \
   ./configure && \
-  make && \
-  make install && \
-  cd ext/zlib && \
-  ruby extconf.rb && \
   make && \
   make install && \
   cd / && \
