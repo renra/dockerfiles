@@ -1,32 +1,50 @@
 FROM debian:jessie
 
-RUN apt-get -qy update
-RUN apt-get -qy install build-essential git git-core libcurl3 curl
-RUN apt-get install -qy zlib1g-dev
-RUN apt-get install -qy libssl-dev
+RUN apt-get -qy update && \
+  apt-get -qy install build-essential git git-core libcurl3 curl && \
+  apt-get install -qy zlib1g-dev && \
+  apt-get install -qy libssl-dev && \
+  apt-get install -qy libpq-dev && \
+  apt-get install -qy libreadline-dev && \
+  apt-get install -qy locales locales-all && \
+  rm -rf /var/lib/apt/lists/*
+
+RUN locale-gen en_GB.UTF-8
+
+ENV LC_ALL=en_GB.UTF-8
+ENV LANG=en_GB.UTF-8
+ENV LANGUAGE=en_GB.UTF-8
+
+ARG RUBY_MAJOR=2.1
+ARG RUBY_MINOR=7
+ARG RUBY_VERSION=$RUBY_MAJOR.$RUBY_MINOR
 
 RUN mkdir /ruby && \
   cd /ruby && \
-  curl http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.1.tar.gz | tar xz && \
-  cd ruby-2.4.1 && \
-  ./configure && \
+  curl http://cache.ruby-lang.org/pub/ruby/$RUBY_MAJOR/ruby-$RUBY_VERSION.tar.gz | tar xz && \
+  cd ruby-$RUBY_VERSION && \
+  ./configure --with-openssl-dir=/usr --with-readline-dir=/usr --with-zlib-dir=/usr && \
   make && \
   make install && \
   cd / && \
   rm -rf /ruby
 
-RUN apt-get -qyy install python && \
+
+ARG NODE_VERSION=4.5.0
+
+RUN apt-get -qy update && \
+  apt-get -qy install python && \
   mkdir /node && \
   cd /node && \
-  curl http://nodejs.org/dist/v8.1.2/node-v8.1.2.tar.gz | tar xz && \
-  cd node-v8.1.2 && \
+  curl http://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION.tar.gz | tar xz && \
+  cd node-v$NODE_VERSION && \
   ./configure && \
   make && \
   make install && \
   cd / && \
   rm -rf /node && \
-  apt-get -qyy remove python && \
-  apt-get -qyy autoremove
+  apt-get -qy remove python && \
+  apt-get -qy autoremove
 
 
 RUN echo 'gem: --no-ri --no-rdoc' > ~/.gemrc
