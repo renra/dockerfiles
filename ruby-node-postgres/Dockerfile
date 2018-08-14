@@ -1,4 +1,4 @@
-FROM renra/ruby-node:ruby2.1.7-node4.5.0
+FROM renra/ruby-node:ruby2.5.1-node8.11.3
 
 RUN apt-get -qq -y update && \
   apt-get install -qq -y libpq-dev && \

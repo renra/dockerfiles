@@ -15,8 +15,8 @@ ENV LC_ALL=en_GB.UTF-8
 ENV LANG=en_GB.UTF-8
 ENV LANGUAGE=en_GB.UTF-8
 
-ARG RUBY_MAJOR=2.1
-ARG RUBY_MINOR=7
+ARG RUBY_MAJOR=2.5
+ARG RUBY_MINOR=1
 ARG RUBY_VERSION=$RUBY_MAJOR.$RUBY_MINOR
 
 RUN mkdir /ruby && \
@@ -30,7 +30,7 @@ RUN mkdir /ruby && \
   rm -rf /ruby
 
 
-ARG NODE_VERSION=4.5.0
+ARG NODE_VERSION=8.11.3
 
 RUN apt-get -qy update && \
   apt-get -qy install python && \
