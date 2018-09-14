@@ -1,4 +1,4 @@
-FROM renra/elixir:1.7-stretch
+FROM renra/elixir:1.7
 
 RUN apt-get -qq -y update && \
   apt-get install -qy inotify-tools && \
