@@ -3,7 +3,7 @@ FROM renra/erlang:stretch
 RUN apt-get -qq -y update && \
   apt-get install -qy git-core
 
-ARG ELIXIR_VERSION=1.6
+ARG ELIXIR_VERSION=1.7
 
 RUN git clone https://github.com/elixir-lang/elixir.git && \
   cd elixir && \
