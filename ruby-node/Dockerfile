@@ -1,7 +1,7 @@
-FROM debian:jessie
+FROM debian:10.1-slim
 
-RUN apt-get -qy update && \
-  apt-get -qy install build-essential git git-core libcurl3 curl && \
+RUN apt -qy update && \
+  apt-get -qy install build-essential git git-core libcurl4 curl && \
   apt-get install -qy zlib1g-dev && \
   apt-get install -qy libssl-dev && \
   apt-get install -qy libpq-dev && \
@@ -15,8 +15,8 @@ ENV LC_ALL=en_GB.UTF-8
 ENV LANG=en_GB.UTF-8
 ENV LANGUAGE=en_GB.UTF-8
 
-ARG RUBY_MAJOR=2.5
-ARG RUBY_MINOR=1
+ARG RUBY_MAJOR=2.6
+ARG RUBY_MINOR=4
 ARG RUBY_VERSION=$RUBY_MAJOR.$RUBY_MINOR
 
 RUN mkdir /ruby && \
@@ -30,7 +30,7 @@ RUN mkdir /ruby && \
   rm -rf /ruby
 
 
-ARG NODE_VERSION=8.11.3
+ARG NODE_VERSION=12.1.0
 
 RUN apt-get -qy update && \
   apt-get -qy install python && \
