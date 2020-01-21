@@ -1,4 +1,4 @@
-FROM postgres:9.6
+FROM postgres:12-alpine
 
 RUN localedef -i en_GB -c -f UTF-8 -A /usr/share/locale/locale.alias en_GB.UTF-8
 
