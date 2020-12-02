@@ -1,9 +1,9 @@
-FROM node:12.14.1-stretch-slim
+FROM node:14.15.0-buster-slim
 
 WORKDIR /opt
 
 RUN apt-get -qy update && \
-  apt-get -qy install build-essential git git-core libcurl3 curl && \
+  apt-get -qy install build-essential git git-core libcurl4 curl && \
   apt-get install -qy zlib1g-dev && \
   apt-get install -qy libssl-dev && \
   apt-get install -qy libreadline-dev && \
@@ -20,7 +20,12 @@ RUN curl -L -o dumb-init.deb https://github.com/Yelp/dumb-init/releases/download
   dpkg -i dumb-init.deb && \
   rm dumb-init.deb
 
-RUN yarn global add elm@0.19.1 uglify-js@3.7.6
+RUN curl -L -o elm.gz https://github.com/elm/compiler/releases/download/0.19.1/binary-for-linux-64-bit.gz && \
+  gunzip elm.gz && \
+  chmod +x elm && \
+  mv elm /usr/local/bin/
+
+RUN yarn global add uglify-js@3.12.1
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
